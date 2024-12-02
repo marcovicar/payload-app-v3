@@ -17,8 +17,8 @@ export default async function FooterServer() {
       <div className={"py-12 max-w-5xl mx-auto flex justify-between w-full items-center"}>
         <div className={"relative w-64 h-20"}>
           <Image
-            src={typeof footer.logo === "string" ? "" : footer.logo?.url || ""}
-            alt={typeof footer.logo === "string" ? "" : footer.logo?.alt}
+            src={typeof footer.logo === "object" && footer.logo?.url ? footer.logo.url : ""}
+            alt={typeof footer.logo === "object" && footer.logo?.alt ? footer.logo.alt : ""}
             fill
             className={"object-contain"}
           />

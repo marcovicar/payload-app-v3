@@ -14,10 +14,9 @@ import type { Page } from '@/payload-types'
 
 export type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<
-    | Extract <Page['layout'][0], {blockType: 'cta'}>
-    | Extract <Page['layout'][0], {blockType: 'mediaBlock'}>
->
+  | SerializedBlockNode<{
+  blockType: 'cta' | 'mediaBlock';
+  }>;
 
 type Props = {
   nodes: NodeTypes[]

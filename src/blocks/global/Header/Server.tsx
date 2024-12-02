@@ -1,5 +1,4 @@
 import React from "react";
-// import { getPayload } from '@payloadcms/next/utilities';
 import config from '@payload-config';
 import Image from 'next/image'
 import { getPayload } from 'payload'
@@ -17,8 +16,8 @@ export default async function HeaderServer() {
       <div className={"py-12 max-w-5xl mx-auto flex justify-between w-full items-center"}>
         <div className={"relative w-64 h-20"}>
           <Image
-            src={typeof header.logo === "string" ? "" : header.logo?.url || ""}
-            alt={typeof header.logo === "string" ? "" : header.logo?.alt}
+            src={typeof header.logo === "object" && header.logo?.url ? header.logo.url : ""}
+            alt={typeof header.logo === "object" && header.logo?.alt ? header.logo.alt : ""}
             fill
             className={"object-contain"}
           />
