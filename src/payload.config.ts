@@ -13,6 +13,7 @@ import { Media } from './collections/Media'
 import { Pages } from '@/collections/Pages'
 import { Header } from '@/globals/Header'
 import { Footer } from '@/globals/Footer'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,6 +24,36 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+  },
+  localization: {
+    locales: [
+      {
+        code: 'en',
+        label: {
+          en: 'English',
+          da: 'Engelsk',
+          sv: 'Engelska',
+        },
+      },
+      {
+        code: 'da',
+        label: {
+          en: 'Danish',
+          da: 'Dansk',
+          sv: 'Danska',
+        },
+      },
+      {
+        code: 'sv',
+        label: {
+          en: 'Swedish',
+          da: 'Svensk',
+          sv: 'Svenska',
+        },
+      },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
   },
   collections: [
     Users,
@@ -65,5 +96,10 @@ export default buildConfig({
     //     },
     //   },
     // }),
+    seoPlugin({
+      collections: [
+        'pages',
+      ],
+    }),
   ],
 })

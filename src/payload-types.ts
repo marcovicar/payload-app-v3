@@ -38,7 +38,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'da' | 'sv';
   user: User & {
     collection: 'users';
   };
@@ -109,6 +109,7 @@ export interface Page {
   id: number;
   name: string;
   slug: string;
+  pageType: 'default' | 'product';
   layout: (
     | {
         title: string;
@@ -144,8 +145,13 @@ export interface Page {
         blockType: 'image';
       }
   )[];
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -248,6 +254,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  pageType?: T;
   layout?:
     | T
     | {
@@ -274,8 +281,15 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

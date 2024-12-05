@@ -8,6 +8,7 @@ export const RichText: Block = {
       label: 'Content',
       type: 'richText',
       required: true,
+      localized: true,
     },
   ]
 }

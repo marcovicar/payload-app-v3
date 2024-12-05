@@ -5,12 +5,22 @@ import { Image } from '@/blocks/image/schema';
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  admin: {
+    useAsTitle: 'name',
+  },
+  access: {
+    read: () => true,
+  },
+  versions: {
+    drafts: true,
+  },
   fields: [
     {
       name: 'name',
       label: 'Name',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'slug',
@@ -19,6 +29,17 @@ export const Pages: CollectionConfig = {
       admin: {
         position: 'sidebar',
       },
+      unique: true,
+      required: true,
+    },
+    {
+      name: 'pageType',
+      label: 'Page Type',
+      type: 'select',
+      options: [
+        { label: 'Default', value: 'default' },
+        { label: 'Product', value: 'product' },
+      ],
       required: true,
     },
     {
@@ -31,6 +52,7 @@ export const Pages: CollectionConfig = {
         Image,
       ],
       required: true,
+      localized: true,
     },
   ]
 }

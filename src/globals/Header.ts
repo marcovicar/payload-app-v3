@@ -19,11 +19,13 @@ export const Header: GlobalConfig = {
           name: 'label',
           label: 'Label',
           type: 'text',
+          localized: true,
         },
         {
           name: 'link',
           label: 'Link',
           type: 'text',
+          localized: true,
         },
       ],
       minRows: 1,
