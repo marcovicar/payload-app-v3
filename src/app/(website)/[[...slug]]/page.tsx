@@ -8,10 +8,8 @@ import React, { cache } from 'react';
 import type { Page as PageType } from '../../../payload-types';
 
 import { RenderBlocks } from '@/utils/RenderBlocks';
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 type LocaleType = 'en' | 'da' | 'sv' | 'all';
-
-console.log("console test")
 
 const queryPageBySlug = cache(async ({ slug, locale }: { slug: string; locale: LocaleType }) => {
   const parsedSlug = decodeURIComponent(slug);
@@ -56,9 +54,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }> {
   const langCookie = (await cookies()).get('language');
   const locale = langCookie ? langCookie.value : 'en';
+  const slug = params.slug || 'home'; // Default 'home'
 
   const page = await queryPageBySlug({
-    slug: params.slug || 'home',
+    slug: slug,
     locale: locale as LocaleType,
   })
 
@@ -76,9 +75,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function Page({ params }: { params: { slug?: string } }) {
+export default async function Page({ params }: { params: { slug: string } }) {
   let page: PageType | null;
-  const slug = params.slug || 'home'; // Default para 'home'
+  const slug = params.slug || 'home'; // Default 'home'
 
   const langCookie = (await cookies()).get('language');
   const locale = langCookie ? langCookie.value : 'en';
