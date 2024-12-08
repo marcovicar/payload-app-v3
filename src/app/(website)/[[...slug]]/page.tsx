@@ -32,12 +32,12 @@ const queryPageBySlug = cache(async ({ slug, locale }: { slug: string; locale: L
 })
 
 export async function generateStaticParams() {
-  const payload = await getPayload({ config })
+  const payload = await getPayload({ config });
   const pages = await payload.find({
     collection: 'pages',
     draft: false,
     limit: 1000,
-  })
+  });
 
   return pages.docs
     ?.filter((doc) => {
@@ -48,7 +48,7 @@ export async function generateStaticParams() {
     }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<{
+export async function generateMetadata({ params }: { params: any }): Promise<{
   title: any;
   description: any;
 }> {
@@ -57,25 +57,25 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const slug = params.slug || 'home'; // Default 'home'
 
   const page = await queryPageBySlug({
-    slug: slug,
+    slug,
     locale: locale as LocaleType,
-  })
+  });
 
   if (!page) {
     return {
       title: 'Page not found',
       description: 'This page was not found',
-    }
+    };
   }
 
   const { meta } = page;
   return {
     title: meta?.title || 'Default Title',
     description: meta?.description || 'Default Description',
-  }
+  };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: any }) {
   let page: PageType | null;
   const slug = params.slug || 'home'; // Default 'home'
 
@@ -85,15 +85,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
   page = await queryPageBySlug({
     slug,
     locale: locale as LocaleType,
-  })
+  });
 
   if (!page) {
-    return notFound()
+    return notFound();
   }
 
   return (
     <div className="pb-24">
       <RenderBlocks blocks={page.layout} />
     </div>
-  )
+  );
 }
