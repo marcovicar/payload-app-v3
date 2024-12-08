@@ -1,5 +1,6 @@
 // storage-adapter-import-placeholder
 // import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -7,7 +8,6 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-import { s3Storage } from '@payloadcms/storage-s3'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from '@/collections/Pages'
@@ -109,7 +109,9 @@ export default buildConfig({
           secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
         },
         region: process.env.S3_REGION || "",
-      }
+        endpoint: process.env.S3_ENDPOINT || "",
+        forcePathStyle: true,
+      },
     }),
     seoPlugin({
       collections: [
