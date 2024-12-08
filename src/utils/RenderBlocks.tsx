@@ -29,6 +29,7 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return (
                 <div className="" key={index}>
+                  {/*@ts-ignore*/}
                   <Block id={blockName} {...block} />
                 </div>
               )
