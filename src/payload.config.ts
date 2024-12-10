@@ -59,7 +59,7 @@ export default buildConfig({
   collections: [
     Users,
     Media,
-    Products,
+    // Products,
     Pages,
   ],
   globals: [
