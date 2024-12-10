@@ -10,7 +10,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { Products } from '@/collections/Products'
+// import { Products } from '@/collections/Products'
 import { Pages } from '@/collections/Pages'
 import { Header } from '@/globals/Header'
 import { Footer } from '@/globals/Footer'
